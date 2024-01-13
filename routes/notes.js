@@ -1,3 +1,4 @@
+// Libraries
 const app = require('express').Router()
 const { body } = require('express-validator')
 const fsHelper = require('../helpers/fsUtils')
@@ -10,7 +11,7 @@ app.get('/', (req, res) => {
   .then((data) => res.json(JSON.parse(data)))
 })
 
-// POST Route for a new note
+// POST Route for adding new notes
 app.post('/',
   body('title', 'invalid note title').isString().notEmpty(), 
   body('text', 'invalid note').isString().notEmpty(), 
@@ -27,6 +28,7 @@ app.post('/',
 
 })
 
+//DELETE Route for deleting existing notes
 app.delete('/:id', (req, res) => {
   fsHelper.readFromFile(db, 'utf-8')
   .then((data) => {
