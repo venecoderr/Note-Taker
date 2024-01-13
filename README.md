@@ -14,20 +14,25 @@ To test my newly adquired Express knowledge I took on the endevour of building t
 
 ## Installation
 
-The command npm i should install all dependencies needed
+No installation needed
 
 ## Usage
 When the page loads your are presented with the landing page, click the main button to go to the notes page
 
-[alt text](./screenshot.jpeg)
+![alt text](./public/assets/img/ss1.png)
 
-In the notes page you can add new notes in the boxes on the right and onthe left you have a list with all previous notes 
+In the notes page you can add new notes in the boxes on the right and on the left you have a list with all previous notes 
 
-[alt text](./screenshot.jpeg)
+![alt text](./public/assets/img/ss2.png)
 
-If you click the note title you can open the note and if you click the delete button it will deleted that note (this action is permanent, be careful)
+If you click the note title you can open that note
 
-[alt text](./screenshot.jpeg)
+![alt text](./public/assets/img/ss3.png)
+
+If you click the delete button it will deleted that note (this action is permanent, be careful)
+
+![alt text](./public/assets/img/ss4.png)
+![alt text](./public/assets/img/ss5.png)
 
 ## Credits
 
@@ -39,4 +44,4 @@ For questions contact me at [Github](https://github.com/venecoderr) or [Email me
 
 ## Releases
 
-You can find the lastest version of the app at: 
+You can find the lastest version of the app at: https://jf-notetaker-ea868e702c67.herokuapp.com/
