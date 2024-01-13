@@ -1,35 +1,44 @@
-const app = require('express').Router();
-const { json } = require('express');
-const fs = require('fs')
-const { v4: uuidv4 } = require('uuid');
+const app = require('express').Router()
+const { body } = require('express-validator')
+const fsHelper = require('../helpers/fsUtils')
+const { v4: uuidv4 } = require('uuid')
+const db = './db/notes.json'
 
 // GET Route for retrieving all the notes
-app.get('/', async (req, res) => {
-  fs.readFile('./db/db.json', 'utf-8', (error, data) => error ? console.error(error) : res.json(JSON.parse(data)))
-});
+app.get('/', (req, res) => {
+  fsHelper.readFromFile(db)
+  .then((data) => res.json(JSON.parse(data)))
+})
 
 // POST Route for a new note
-app.post('/', (req, res) => {
-  console.log(req.body);
-
+app.post('/',
+  body('title', 'invalid note title').isString().notEmpty(), 
+  body('text', 'invalid note').isString().notEmpty(), 
+  (req, res) => {
   const { title, text } = req.body
+  const newNote = {
+    title,
+    text,
+    id: uuidv4(),
+  }
   
-  fs.readFile('./db/db.json', 'utf8', (error, data) => {
-    if(error){
-        console.error(error)
-    }else if (req.body) {
-        const newNote = {
-          title,
-          text,
-          note_id: uuidv4(),
-        };
-        const parsedData = JSON.parse(data);
-        parsedData.push(newNote);
-        fs.writeFile('./db/db.json', JSON.stringify(parsedData), (error, data) => error ? console.error(error) : res.json(JSON.parse(newNote)))
-    }else{
-        res.json('send valid request')
+  fsHelper.readAndAppend(newNote, db)
+  res.json(`New note saved ${newNote}`)
+
+})
+
+app.delete('/:id', (req, res) => {
+  fsHelper.readFromFile(db, 'utf-8')
+  .then((data) => {
+    const parsedData = JSON.parse(data)
+    for(let i = 0; i < parsedData.length; i++){
+      if(parsedData[i].id === req.params.id){
+        parsedData.splice(i, 1)
+      }
     }
+    fsHelper.writeToFile(db, parsedData)
   })
-});
+  res.json('deleted')
+})
 
 module.exports = app
