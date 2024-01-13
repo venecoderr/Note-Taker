@@ -44,4 +44,4 @@ For questions contact me at [Github](https://github.com/venecoderr) or [Email me
 
 ## Releases
 
-You can find the lastest version of the app at: 
+You can find the lastest version of the app at: https://jf-notetaker-ea868e702c67.herokuapp.com/
